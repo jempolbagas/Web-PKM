@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 9: Discrete Series &amp; Sequences | Discrete Mathematics I</title>
+  <meta name="description" content="Full learning material for Week 9 of Discrete Mathematics I. Covers arithmetic progressions, geometric series, convergence of infinite series, and translating loop structures into summation notation.">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../prism.css">
+  <link rel="stylesheet" href="shared.css">
+  <!-- KaTeX for math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ]
+    });">
+  </script>
+  <!-- Scripts -->
+  <script src="../script.js" defer></script>
+  <script src="../prism.js" defer></script>
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- LEFT COLUMN: Collapsible Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-title">Academic Life Hub</a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <h3 class="nav-section-title">Navigation</h3>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                Course Index
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-section-title">Weeks</h3>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="week-09.html" class="nav-link active">Week 9 — Discrete Series</a></li>
+            <li class="nav-item"><a href="week-10.html" class="nav-link">Week 10 — Homogeneous Recurrence</a></li>
+            <li class="nav-item"><a href="week-11.html" class="nav-link">Week 11 — Generating Functions</a></li>
+            <li class="nav-item"><a href="week-12.html" class="nav-link">Week 12 — Advanced Recurrence</a></li>
+            <li class="nav-item"><a href="week-13.html" class="nav-link">Week 13 — GF Applications</a></li>
+            <li class="nav-item"><a href="week-14.html" class="nav-link">Week 14 — Inclusion-Exclusion</a></li>
+            <li class="nav-item"><a href="week-15.html" class="nav-link">Week 15 — Relation Theory</a></li>
+            <li class="nav-item"><a href="week-16.html" class="nav-link">Week 16 — UAS Mastery</a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- CENTER COLUMN: Main Content -->
+    <main class="main-content">
+
+      <header class="main-header">
+        <div class="header-left">
+          <button id="toggle-sidebar" class="icon-btn" aria-label="Toggle Navigation Sidebar">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div class="breadcrumb">
+            <a href="../index.html" style="color:var(--text-muted);text-decoration:none;">Home</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="index.html" style="color:var(--text-muted);text-decoration:none;">Discrete Mathematics I</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">Week 9</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="content-wrapper">
+        <article class="content-body">
+
+          <!-- ══════════════════════════════════════════════ -->
+          <!-- SECTION 1: WEEK HEADER                        -->
+          <!-- ══════════════════════════════════════════════ -->
+
+          <div class="week-header">
+            <div class="week-header-meta">
+              <span class="week-label">Week 9 &bull; Discrete Mathematics I</span>
+              <span class="difficulty-badge badge-beginner">Beginner</span>
+            </div>
+            <h1 id="discrete-series">Discrete Series &amp; Sequences</h1>
+            <p class="week-header-subtitle">From summing loops to taming infinity — the algebra of accumulation.</p>
+            <div class="week-reading-time">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M12 6v6l4 2"/></svg>
+              Estimated reading &amp; study time: 45–60 minutes
+            </div>
+            <!-- Course arc: Week 9 of 16, so ~56% through the course -->
+            <div class="week-arc">
+              <span class="week-arc-label">Course Progress</span>
+              <div class="week-arc-track">
+                <div class="week-arc-fill" style="width: 12.5%;"></div>
+              </div>
+              <span class="week-arc-label">Week 1 of 8</span>
+            </div>
+          </div>
+
+
+          <!-- ══════════════════════════════════════════════ -->
+          <!-- SECTION 2: PREREQUISITE CHECKLIST             -->
+          <!-- ══════════════════════════════════════════════ -->
+
+          <div class="prereq-section">
+            <div class="prereq-section-title">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Before You Begin — Prerequisite Checklist
+            </div>
+            <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:14px;">
+              Check each item only if you're genuinely comfortable with it. If any are unfamiliar, review them first.
+            </p>
+            <ul class="prereq-list">
+              <li class="prereq-item">
+                <input type="checkbox" class="prereq-check" id="prereq-1">
+                <label for="prereq-1" class="prereq-text">
+                  <strong>Sigma notation ($\sum$)</strong> — you can read and write $\sum_{i=1}^{n} f(i)$ and know what its parts mean.
+                  <span class="prereq-self-test">Self-test: What does $\sum_{i=1}^{4} i$ equal? (Answer: 10)</span>
+                </label>
+              </li>
+              <li class="prereq-item">
+                <input type="checkbox" class="prereq-check" id="prereq-2">
+                <label for="prereq-2" class="prereq-text">
+                  <strong>Basic algebra</strong> — comfortable isolating variables, factoring, and working with fractions and exponents.
+                  <span class="prereq-self-test">Self-test: Simplify $\frac{a(1 - r^n)}{1-r}$ — can you identify what each symbol means?</span>
+                </label>
+              </li>
+              <li class="prereq-item">
+                <input type="checkbox" class="prereq-check" id="prereq-3">
+                <label for="prereq-3" class="prereq-text">
+                  <strong>For-loop intuition</strong> — you understand how a nested for-loop iterates and can count total iterations for simple cases.
+                  <span class="prereq-self-test">Self-test: How many times does the inner body run if the outer loop runs $n=5$ times and the inner always runs $i$ times?</span>
+                </label>
+              </li>
+              <li class="prereq-item">
+                <input type="checkbox" class="prereq-check" id="prereq-4">
+                <label for="prereq-4" class="prereq-text">
+                  <strong>Absolute value &amp; limits (basic)</strong> — you know what $|r| &lt; 1$ means and have a rough intuition that infinitely many small terms can add to a finite number.
+                </label>
+              </li>
+            </ul>
+          </div>
+
+
+          <!-- ══════════════════════════════════════════════ -->
+          <!-- SECTION 3: MOTIVATION / HOOK                  -->
+          <!-- ══════════════════════════════════════════════ -->
+
+          <div class="section-heading">
+            <h2 id="why-this-matters">
+              <span class="section-number">1</span> Why Does This Matter?
+            </h2>
+          </div>
+
+          <p>
+            Here's a question that will follow you through all of computer science: <em>how many steps does this algorithm take?</em> It sounds simple, but answering it precisely requires a tool we don't yet have — a way to mathematically describe what loops accumulate. That tool is the discrete series.
+          </p>
+          <p>
+            Think about the last time you wrote a nested for-loop. You probably had an intuitive sense that the inner loop "does more work" as the outer index grows. But can you say <em>exactly</em> how much more? Can you write a single formula — no loops, no counting — that tells you the total number of operations for any input size $n$? That's precisely what this week teaches you to do.
+          </p>
+          <p>
+            Beyond algorithms, series are everywhere in applied mathematics. The compound interest formula your bank uses is a geometric series in disguise. Signal processing relies on infinite series to decompose and reconstruct waveforms. Even the famous Fibonacci sequence, which we'll see again in Week 10, has a closed-form expression derived through series techniques. This week is your entry point into that world.
+          </p>
+
+          <!-- Active Recall: Motivation check -->
+          <details class="recall-card">
+            <summary>
+              <span class="recall-icon">?</span>
+              <span class="recall-question">Quick check — before reading further: can you guess what $1 + 2 + 3 + \ldots + 100$ equals, and <em>why</em> there's a fast way to calculate it?</span>
+            </summary>
+            <div class="recall-answer">
+              <p>The sum is <strong>5050</strong>. The elegant trick — attributed to Gauss — is to pair terms from opposite ends: $(1 + 100) + (2 + 99) + \ldots + (50 + 51) = 50 \times 101 = 5050$. More generally, $\sum_{i=1}^{n} i = \frac{n(n+1)}{2}$. This is the closed-form arithmetic series formula — one of the most important results in this week's material.</p>
+            </div>
+          </details>
+
+
+          <!-- ══════════════════════════════════════════════ -->
+          <!-- SECTION 4: BIG PICTURE                        -->
+          <!-- ══════════════════════════════════════════════ -->
+
+          <hr class="section-divider">
+          <div class="section-heading">
+            <h2 id="big-picture">
+              <span class="section-number">2</span> The Shape of This Week
+            </h2>
+          </div>
+
+          <p>This week covers three interconnected ideas that build on each other:</p>
+          <ol>
+            <li><strong>Arithmetic Progressions</strong> — sequences with a constant difference, and their finite sums.</li>
+            <li><strong>Geometric Progressions</strong> — sequences with a constant ratio, their finite sums, and the remarkable case where an <em>infinite</em> sum converges to a finite number.</li>
+            <li><strong>Summation Notation &amp; Loop Translation</strong> — the skill of reading a loop as a sigma expression, and then solving that expression to find a closed-form runtime formula.</li>
+          </ol>
+          <p>By the end, you'll be able to look at any loop whose iteration count follows an arithmetic or geometric pattern, and instantly write its total cost as a clean formula.</p>
+
+
+          <!-- ══════════════════════════════════════════════ -->
+          <!-- SECTION 5: CORE CONTENT                       -->
+          <!-- ══════════════════════════════════════════════ -->
+
+          <hr class="section-divider">
+          <div class="section-heading">
+            <h2 id="arithmetic-progressions">
+              <span class="section-number">3</span> Arithmetic Progressions
+            </h2>
+          </div>
+
+          <h3 id="arithmetic-intuition">The Intuition</h3>
+          <p>
+            An arithmetic progression (AP) is just a sequence where you add the same number each time. Start at 3 and keep adding 5: $3, 8, 13, 18, 23, \ldots$ The number you keep adding is called the <strong>common difference</strong>, $d$. The sequence is perfectly regular — no surprises, no branching — just a steady march forward.
+          </p>
+          <p>
+            The interesting question isn't about individual terms, but about their <em>sum</em>. If you had to add up the first $n$ terms of an AP, you could do it term by term — but that's $O(n)$ work. The algebraic formula lets you do it in $O(1)$, regardless of how large $n$ gets.
+          </p>
+
+          <!-- Formal Definition -->
+          <div class="definition-box">
+            <div class="definition-box-label">Definition</div>
+            <div class="definition-box-title">Arithmetic Progression — Finite Sum</div>
+            <p>
+              Given a first term $a$ and common difference $d$, the $n$-th term is $a_n = a + (n-1)d$.
+            </p>
+            <p>
+              The sum of the first $n$ terms is:
+              $$S_n = \sum_{i=1}^{n} \bigl(a + (i-1)d\bigr) = \frac{n}{2}(2a + (n-1)d)$$
+            </p>
+            <p>
+              This can also be written as $S_n = \frac{n}{2}(a_1 + a_n)$, i.e., the number of terms times the average of the first and last term.
+            </p>
+          </div>
+
+          <!-- Worked Example: AP -->
+          <div class="worked-example">
+            <div class="worked-example-header">
+              <span class="worked-example-label">Worked Example</span>
+              <span class="worked-example-title">Sum of a 6-term arithmetic progression</span>
+            </div>
+            <div class="worked-example-body">
+              <p><strong>Problem:</strong> Find the sum of the sequence $2, 5, 8, 11, 14, 17$.</p>
+              <div class="example-step">
+                <div class="example-step-num">1</div>
+                <div class="example-step-content">
+                  <strong>Identify the parameters.</strong> First term $a = 2$, common difference $d = 3$, number of terms $n = 6$.
+                </div>
+              </div>
+              <div class="example-step">
+                <div class="example-step-num">2</div>
+                <div class="example-step-content">
+                  <strong>Apply the formula.</strong>
+                  $$S_6 = \frac{6}{2}(2 \cdot 2 + (6-1) \cdot 3) = 3(4 + 15) = 3 \times 19 = 57$$
+                </div>
+              </div>
+              <div class="example-step">
+                <div class="example-step-num">3</div>
+                <div class="example-step-content">
+                  <strong>Verify by counting.</strong> $2 + 5 + 8 + 11 + 14 + 17 = 57$. ✓
+                </div>
+              </div>
+              <div class="common-mistake">
+                ⚠️ <strong>Common mistake:</strong> Forgetting that the formula gives the sum of the <em>first</em> $n$ terms starting from $a_1 = a$. If the sequence starts at a different index (e.g., $a_3$), you need to adjust accordingly.
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Recall: AP -->
+          <details class="recall-card">
+            <summary>
+              <span class="recall-icon">?</span>
+              <span class="recall-question">An arithmetic sequence starts at $a = 5$ with common difference $d = -2$. What is $S_{10}$ (the sum of the first 10 terms)?</span>
+            </summary>
+            <div class="recall-answer">
+              <p>Using $S_n = \frac{n}{2}(2a + (n-1)d)$:</p>
+              <p>$$S_{10} = \frac{10}{2}(2 \cdot 5 + (10-1)(-2)) = 5(10 - 18) = 5 \times (-8) = -40$$</p>
+              <p>Notice that a negative $d$ means the series eventually goes negative and the sum is pulled down. The sequence is: $5, 3, 1, -1, -3, -5, -7, -9, -11, -13$. Sum $= -40$. ✓</p>
+            </div>
+          </details>
+
+
+          <!-- ── Geometric Progressions ── -->
+          <hr class="section-divider">
+          <div class="section-heading">
+            <h2 id="geometric-progressions">
+              <span class="section-number">4</span> Geometric Progressions
+            </h2>
+          </div>
+
+          <h3 id="geometric-intuition">The Intuition</h3>
+          <p>
+            A geometric progression (GP) is like an AP's more dramatic cousin. Instead of <em>adding</em> a constant, you <em>multiply</em> by a constant each time. Start at 1 and keep doubling: $1, 2, 4, 8, 16, \ldots$ The multiplier is the <strong>common ratio</strong>, $r$.
+          </p>
+          <p>
+            GPs grow (or shrink) exponentially — which is exactly why they're so important in computer science. The total work done by a divide-and-conquer algorithm (where each level spawns $r$ subproblems) follows a geometric series. The number of nodes in a complete binary tree is a geometric sum.
+          </p>
+          <p>
+            And here's where GPs become genuinely mysterious: what happens when we never stop? If $r$ is small enough — specifically, if $|r| &lt; 1$ — then the terms shrink towards zero fast enough that even an <em>infinite</em> sum converges to a finite number. This is one of the most important ideas in all of analysis, and it starts right here.
+          </p>
+
+          <!-- Formal Definition: Finite GP -->
+          <div class="definition-box">
+            <div class="definition-box-label">Definition</div>
+            <div class="definition-box-title">Geometric Progression — Finite Sum</div>
+            <p>
+              Given a first term $a$ and common ratio $r \neq 1$, the sum of the first $n$ terms is:
+              $$S_n = \sum_{i=0}^{n-1} a \cdot r^i = a \cdot \frac{1 - r^n}{1 - r}$$
+            </p>
+            <p>
+              If $r = 1$, then all terms equal $a$ and $S_n = na$.
+            </p>
+          </div>
+
+          <!-- Theorem: Infinite GP -->
+          <div class="definition-box theorem-box">
+            <div class="definition-box-label">Theorem</div>
+            <div class="definition-box-title">Infinite Geometric Series — Convergence</div>
+            <p>
+              If $|r| &lt; 1$, the infinite series converges:
+              $$S_\infty = \sum_{i=0}^{\infty} a \cdot r^i = \frac{a}{1 - r}$$
+            </p>
+            <p>
+              If $|r| \geq 1$, the series <em>diverges</em> — it has no finite sum.
+            </p>
+          </div>
+
+          <h3 id="geometric-derivation">Why Does the Finite Formula Work?</h3>
+          <p>
+            Rather than just memorizing the formula, let's derive it — because the derivation reveals a beautiful algebraic trick you'll see again and again. The key idea is <em>telescoping</em>: multiply the sum by $r$ and subtract.
+          </p>
+
+          <div class="worked-example">
+            <div class="worked-example-header">
+              <span class="worked-example-label">Derivation</span>
+              <span class="worked-example-title">Proof of the finite geometric sum formula</span>
+            </div>
+            <div class="worked-example-body">
+              <div class="example-step">
+                <div class="example-step-num">1</div>
+                <div class="example-step-content">
+                  Write out the sum: $S_n = a + ar + ar^2 + \ldots + ar^{n-1}$
+                </div>
+              </div>
+              <div class="example-step">
+                <div class="example-step-num">2</div>
+                <div class="example-step-content">
+                  Multiply both sides by $r$: $rS_n = ar + ar^2 + \ldots + ar^{n-1} + ar^n$
+                </div>
+              </div>
+              <div class="example-step">
+                <div class="example-step-num">3</div>
+                <div class="example-step-content">
+                  Subtract: $S_n - rS_n = a - ar^n$. Notice how all the middle terms cancel — that's the telescoping trick.
+                </div>
+              </div>
+              <div class="example-step">
+                <div class="example-step-num">4</div>
+                <div class="example-step-content">
+                  Factor and divide: $S_n(1 - r) = a(1 - r^n)$, so $S_n = \dfrac{a(1-r^n)}{1-r}$. &nbsp;$\square$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Recall: Geometric -->
+          <details class="recall-card">
+            <summary>
+              <span class="recall-icon">?</span>
+              <span class="recall-question">Does the series $\displaystyle\sum_{k=0}^{\infty} \left(\frac{2}{3}\right)^k$ converge? If yes, what does it converge to?</span>
+            </summary>
+            <div class="recall-answer">
+              <p><strong>Yes, it converges.</strong> The ratio is $r = \frac{2}{3}$, and $|r| = \frac{2}{3} &lt; 1$, so the convergence condition is satisfied.</p>
+              <p>Using the infinite sum formula with $a = 1$ (the first term is $\left(\frac{2}{3}\right)^0 = 1$):
+              $$S_\infty = \frac{1}{1 - \frac{2}{3}} = \frac{1}{\frac{1}{3}} = 3$$
+              </p>
+              <p>Intuition: even though there are infinitely many terms, they shrink so fast that they sum to exactly 3.</p>
+            </div>
+          </details>
+
+
+          <!-- ── Summation & Loop Translation ── -->
+          <hr class="section-divider">
+          <div class="section-heading">
+            <h2 id="loop-translation">
+              <span class="section-number">5</span> Translating Loops into Summations
+            </h2>
+          </div>
+
+          <p>
+            This is the most practically useful skill in this week's material. The goal is to take a piece of code — a loop or nested loop — and write its total operation count as a sigma expression. Once it's in sigma form, you can apply the AP and GP formulas to get a closed-form answer.
+          </p>
+          <p>
+            The method is always the same: <em>read the loop bounds, write the sum, collapse from the inside out.</em>
+          </p>
+
+          <div class="worked-example">
+            <div class="worked-example-header">
+              <span class="worked-example-label">Worked Example</span>
+              <span class="worked-example-title">Translating a triangular nested loop</span>
+            </div>
+            <div class="worked-example-body">
+              <p><strong>Problem:</strong> How many times does the inner body execute?</p>
+              <pre><code class="language-python">count = 0
+for i in range(1, n + 1):      # i = 1, 2, ..., n
+    for j in range(1, i + 1):  # j = 1, 2, ..., i
+        count += 1              # ← count this</code></pre>
+
+              <div class="example-step">
+                <div class="example-step-num">1</div>
+                <div class="example-step-content">
+                  <strong>Write the double summation.</strong> The outer index $i$ runs from 1 to $n$; for each $i$, the inner index $j$ runs from 1 to $i$. Each inner iteration contributes 1 operation.
+                  $$\text{count} = \sum_{i=1}^{n} \sum_{j=1}^{i} 1$$
+                </div>
+              </div>
+              <div class="example-step">
+                <div class="example-step-num">2</div>
+                <div class="example-step-content">
+                  <strong>Evaluate the inner sum.</strong> $\displaystyle\sum_{j=1}^{i} 1 = i$ (it's just counting from 1 to $i$, which gives $i$ steps).
+                  $$\text{count} = \sum_{i=1}^{n} i$$
+                </div>
+              </div>
+              <div class="example-step">
+                <div class="example-step-num">3</div>
+                <div class="example-step-content">
+                  <strong>Apply the AP formula.</strong> This is the sum of the first $n$ integers — a classic arithmetic series with $a=1$, $d=1$:
+                  $$\text{count} = \frac{n(n+1)}{2} = O(n^2)$$
+                </div>
+              </div>
+              <div class="common-mistake">
+                ⚠️ <strong>Common mistake:</strong> Writing the inner limit as $n$ instead of $i$. Always check — is the inner limit a <em>constant</em>, or does it depend on the outer loop variable? If it depends on $i$, the limits are not symmetric and require more care.
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Recall: Loop Translation -->
+          <details class="recall-card">
+            <summary>
+              <span class="recall-icon">?</span>
+              <span class="recall-question">Translate and solve: what is the closed-form of <code>count</code> in this loop?
+                <br><code>for i in range(1, n+1): for j in range(1, 2*i): count += 1</code>
+              </span>
+            </summary>
+            <div class="recall-answer">
+              <p>The inner loop runs $j$ from 1 to $2i - 1$ (since Python's <code>range(1, 2*i)</code> stops before $2i$), giving $2i - 1$ iterations per outer step.</p>
+              <p>$$\text{count} = \sum_{i=1}^{n}(2i - 1) = 2\sum_{i=1}^{n}i - \sum_{i=1}^{n}1 = 2 \cdot \frac{n(n+1)}{2} - n = n^2$$</p>
+              <p>So the exact answer is $n^2$ — the total is a <em>perfect square</em> regardless of $n$. This is a known identity: the sum of the first $n$ odd numbers equals $n^2$.</p>
+            </div>
+          </details>
+
+
+          <!-- ══════════════════════════════════════════════ -->
+          <!-- SECTION 6: SYNTHESIS                          -->
+          <!-- ══════════════════════════════════════════════ -->
+
+          <hr class="section-divider">
+          <div class="section-heading">
+            <h2 id="synthesis">
+              <span class="section-number">6</span> Synthesis — How It All Connects
+            </h2>
+          </div>
+
+          <p>
+            Arithmetic and geometric series aren't really separate topics — they're two points on a spectrum of how sequences can grow. The AP grows <em>linearly</em>: add a constant, accumulate a quadratic sum. The GP grows <em>exponentially</em>: multiply a constant, and depending on whether $r &gt; 1$ or $r &lt; 1$, you get either explosive growth or graceful decay.
+          </p>
+          <p>
+            What connects them to algorithm analysis is the loop translation skill. Every loop has an implicit summation hiding in it. Once you see that, you can apply the AP or GP formula directly to get a complexity result. Next week, we'll generalize this when we study recurrence relations — where the complexity of one call depends on the complexity of smaller calls, and we need even more powerful tools to unpack the sum.
+          </p>
+          <p>
+            Think of this week as building the vocabulary. You've learned to speak in sums. Starting next week, you'll learn to speak in equations about sums.
+          </p>
+
+
+          <!-- ══════════════════════════════════════════════ -->
+          <!-- SECTION 7: PRACTICE PROBLEMS                  -->
+          <!-- ══════════════════════════════════════════════ -->
+
+          <div class="practice-section">
+            <div class="practice-section-title">Practice Problems</div>
+            <div class="practice-section-subtitle">Work through these in order. The difficulty increases. Attempt each before revealing the solution.</div>
+
+            <!-- Problem 1 -->
+            <div class="problem-item">
+              <div class="problem-header">
+                <span class="problem-number">Problem 1</span>
+                <span class="difficulty-badge badge-beginner">Level 1</span>
+              </div>
+              <p class="problem-statement">
+                Calculate the exact sum of the infinite geometric series:
+                $$\sum_{k=2}^{\infty} 3 \cdot \left(\frac{1}{4}\right)^k$$
+              </p>
+              <details class="study-card">
+                <summary>View Full Solution</summary>
+                <div class="details-content">
+                  <p><strong>Step 1 — Find the first term.</strong> The series starts at $k = 2$, so the first term is $a = 3 \cdot \left(\frac{1}{4}\right)^2 = \frac{3}{16}$.</p>
+                  <p><strong>Step 2 — Check convergence.</strong> $r = \frac{1}{4}$, and $|r| &lt; 1$, so the series converges.</p>
+                  <p><strong>Step 3 — Apply the formula.</strong>
+                  $$S_\infty = \frac{a}{1-r} = \frac{\frac{3}{16}}{1 - \frac{1}{4}} = \frac{\frac{3}{16}}{\frac{3}{4}} = \frac{3}{16} \cdot \frac{4}{3} = \frac{1}{4}$$
+                  </p>
+                  <p><strong>Final Answer:</strong> The sum is $\dfrac{1}{4}$.</p>
+                </div>
+              </details>
+            </div>
+
+            <!-- Problem 2 -->
+            <div class="problem-item">
+              <div class="problem-header">
+                <span class="problem-number">Problem 2</span>
+                <span class="difficulty-badge badge-intermediate">Level 2</span>
+              </div>
+              <p class="problem-statement">
+                Translate the following loop into a mathematical summation, simplify completely, and express the result as a closed-form formula in $N$:
+              </p>
+              <pre><code class="language-python">count = 0
+for i in range(1, N + 1):
+    for j in range(1, i * 2):
+        count += 1</code></pre>
+              <details class="study-card">
+                <summary>View Full Solution</summary>
+                <div class="details-content">
+                  <p><strong>Step 1 — Set up the summation.</strong> The inner loop runs $j$ from 1 to $2i - 1$, giving $2i - 1$ iterations for each value of $i$.
+                  $$\text{count} = \sum_{i=1}^{N} \sum_{j=1}^{2i-1} 1 = \sum_{i=1}^{N} (2i - 1)$$
+                  </p>
+                  <p><strong>Step 2 — Expand and apply standard identities.</strong>
+                  $$\sum_{i=1}^{N}(2i-1) = 2\sum_{i=1}^{N}i - \sum_{i=1}^{N}1 = 2 \cdot \frac{N(N+1)}{2} - N = N(N+1) - N = N^2$$
+                  </p>
+                  <p><strong>Final Answer:</strong> $\text{count} = N^2$. The algorithm is $\Theta(N^2)$.</p>
+                </div>
+              </details>
+            </div>
+
+            <!-- Problem 3 -->
+            <div class="problem-item">
+              <div class="problem-header">
+                <span class="problem-number">Problem 3</span>
+                <span class="difficulty-badge badge-hard">Level 3 — Challenge</span>
+              </div>
+              <p class="problem-statement">
+                A computer performs a task that takes 1 second on the first day. Each subsequent day, it takes exactly half as long as the day before. If the computer runs this task every day <em>forever</em>, what is the total time spent? Then, derive what happens in the general case where the task takes $t_0$ seconds on day 1 and shrinks by a factor of $r$ ($0 &lt; r &lt; 1$) each day.
+              </p>
+              <details class="study-card">
+                <summary>View Full Solution</summary>
+                <div class="details-content">
+                  <p><strong>Specific case.</strong> The daily times form an infinite geometric series with $a = 1$ and $r = \frac{1}{2}$:
+                  $$\text{Total} = \sum_{n=0}^{\infty} 1 \cdot \left(\frac{1}{2}\right)^n = \frac{1}{1 - \frac{1}{2}} = 2 \text{ seconds}$$
+                  </p>
+                  <p><strong>General case.</strong> With first term $t_0$ and ratio $r \in (0, 1)$:
+                  $$\text{Total} = \sum_{n=0}^{\infty} t_0 r^n = \frac{t_0}{1 - r}$$
+                  </p>
+                  <p><strong>Insight:</strong> No matter how long the task runs, as long as it shrinks by a constant ratio each time, the <em>total</em> time is always finite: exactly $\frac{t_0}{1-r}$. When $r = \frac{1}{2}$, the total is always exactly $2t_0$.</p>
+                </div>
+              </details>
+            </div>
+
+          </div>
+
+
+          <!-- ══════════════════════════════════════════════ -->
+          <!-- SECTION 8: WEEK SUMMARY / REFERENCE CARD      -->
+          <!-- ══════════════════════════════════════════════ -->
+
+          <div class="week-summary">
+            <div class="week-summary-title">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 7l2 2 4-4"/></svg>
+              Week 9 — Quick Reference Card
+            </div>
+            <div class="summary-grid">
+              <div>
+                <div class="summary-col-title">Key Formulas</div>
+                <ul class="summary-term-list">
+                  <li class="summary-term"><strong>AP Sum:</strong> <span>$S_n = \frac{n}{2}(2a + (n-1)d)$</span></li>
+                  <li class="summary-term"><strong>GP Finite:</strong> <span>$S_n = \frac{a(1-r^n)}{1-r}$</span></li>
+                  <li class="summary-term"><strong>GP Infinite:</strong> <span>$S_\infty = \frac{a}{1-r}$ when $|r|&lt;1$</span></li>
+                  <li class="summary-term"><strong>$\sum_{i=1}^{n} i$:</strong> <span>$= \frac{n(n+1)}{2}$</span></li>
+                  <li class="summary-term"><strong>$\sum_{i=1}^{n} (2i-1)$:</strong> <span>$= n^2$</span></li>
+                </ul>
+              </div>
+              <div>
+                <div class="summary-col-title">Key Definitions</div>
+                <ul class="summary-term-list">
+                  <li class="summary-term"><strong>Common difference $d$:</strong> <span>Constant added between AP terms</span></li>
+                  <li class="summary-term"><strong>Common ratio $r$:</strong> <span>Constant multiplied between GP terms</span></li>
+                  <li class="summary-term"><strong>Convergence:</strong> <span>Infinite sum approaches a finite limit</span></li>
+                  <li class="summary-term"><strong>Closed-form:</strong> <span>A formula with no loops or sums — just arithmetic</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="summary-caution">
+              ⚠️ <strong>Never forget to check $|r| &lt; 1$ before applying the infinite GP formula.</strong> If $|r| \geq 1$, the series diverges and the formula doesn't apply.
+            </div>
+          </div>
+
+
+          <!-- ══════════════════════════════════════════════ -->
+          <!-- SECTION 9: BRIDGE FORWARD                     -->
+          <!-- ══════════════════════════════════════════════ -->
+
+          <hr class="section-divider">
+          <div class="section-heading">
+            <h2 id="bridge-forward">
+              <span class="section-number">7</span> Looking Ahead — Week 10
+            </h2>
+          </div>
+
+          <p>
+            Next week, we meet <strong>recurrence relations</strong> — a different way of defining sequences where each term is expressed in terms of earlier terms. Think $T(n) = 2T(n/2) + n$ (the recurrence for Merge Sort). To solve these, we'll use the characteristic equation method, which builds directly on your understanding of geometric sequences: the solutions involve powers of the roots of a polynomial, and checking for convergence looks just like what you practiced this week.
+          </p>
+          <p>
+            The skill of translating loops into summations will also appear again — but instead of solving the summation directly, we'll set up a recurrence and solve <em>that</em>. Consider this week's groundwork as the foundation those techniques rest on.
+          </p>
+
+          <!-- Week Navigation -->
+          <div class="week-nav">
+            <a href="index.html" class="week-nav-link">
+              <span class="week-nav-arrow">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              </span>
+              <div>
+                <div class="week-nav-label">Back to</div>
+                <div class="week-nav-title">Course Index</div>
+              </div>
+            </a>
+            <a href="week-10.html" class="week-nav-link next">
+              <span class="week-nav-arrow">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </span>
+              <div>
+                <div class="week-nav-label">Next — Week 10</div>
+                <div class="week-nav-title">Homogeneous Recurrence Relations</div>
+              </div>
+            </a>
+          </div>
+
+        </article>
+      </div>
+    </main>
+
+    <!-- RIGHT COLUMN: Auto-generated Table of Contents -->
+    <aside class="toc-container">
+      <h3 class="toc-title">On This Page</h3>
+      <ul class="toc-list">
+        <!-- Populated by script.js -->
+        <li class="toc-item"><a href="#discrete-series" class="toc-link">Loading…</a></li>
+      </ul>
+    </aside>
+
+  </div>
+
+  <script>
+    // Persist "mark as complete" for Week 9 via localStorage
+    document.addEventListener('DOMContentLoaded', () => {
+      const PREFIX = 'pkm-dm-week-done-';
+      const WEEK = '9';
+      // No toggle on the week page itself — done via course index
+      // But we mark the sidebar link active
+    });
+  </script>
+
+</body>
+</html>

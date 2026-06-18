@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discrete Mathematics I — Course Index | Academic Life Hub</title>
+  <meta name="description" content="Full course index for Discrete Mathematics I. Weekly learning materials covering discrete series, recurrence relations, generating functions, inclusion-exclusion, and relation theory.">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../prism.css">
+  <link rel="stylesheet" href="shared.css">
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, { delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false}
+    ]});">
+  </script>
+  <!-- Scripts -->
+  <script src="../script.js" defer></script>
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- LEFT COLUMN: Collapsible Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-title">Academic Life Hub</a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <h3 class="nav-section-title">Navigation</h3>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                Dashboard
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-section-title">Courses</h3>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link active">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                Discrete Mathematics I
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-section-title">Weeks</h3>
+          <ul class="nav-list" id="week-nav-list">
+            <li class="nav-item"><a href="week-09.html" class="nav-link">Week 9 — Discrete Series</a></li>
+            <li class="nav-item"><a href="week-10.html" class="nav-link">Week 10 — Homogeneous Recurrence</a></li>
+            <li class="nav-item"><a href="week-11.html" class="nav-link">Week 11 — Generating Functions</a></li>
+            <li class="nav-item"><a href="week-12.html" class="nav-link">Week 12 — Advanced Recurrence</a></li>
+            <li class="nav-item"><a href="week-13.html" class="nav-link">Week 13 — GF Applications</a></li>
+            <li class="nav-item"><a href="week-14.html" class="nav-link">Week 14 — Inclusion-Exclusion</a></li>
+            <li class="nav-item"><a href="week-15.html" class="nav-link">Week 15 — Relation Theory</a></li>
+            <li class="nav-item"><a href="week-16.html" class="nav-link">Week 16 — UAS Mastery</a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- CENTER COLUMN: Main Content Area -->
+    <main class="main-content">
+
+      <!-- Sticky Navigation Header -->
+      <header class="main-header">
+        <div class="header-left">
+          <button id="toggle-sidebar" class="icon-btn" aria-label="Toggle Navigation Sidebar">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div class="breadcrumb">
+            <a href="../index.html" class="breadcrumb-root" style="color:var(--text-muted);text-decoration:none;">Home</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">Discrete Mathematics I</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content Body -->
+      <div class="content-wrapper">
+        <article class="content-body">
+
+          <!-- Course Hero -->
+          <div class="course-hero">
+            <p class="course-hero-label">Course Index &bull; Discrete Mathematics I</p>
+            <h1 id="discrete-mathematics-i">Discrete Mathematics I</h1>
+            <p class="course-hero-description">
+              A comprehensive series of learning materials covering the second half of Discrete Mathematics I. Each week takes you from intuition to mastery, with full narrative explanations, worked examples, and embedded active-recall exercises.
+            </p>
+            <div class="course-stats">
+              <div class="stat-item">
+                <span class="stat-value">8</span>
+                <span class="stat-label">Weeks</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value" id="completed-count">0</span>
+                <span class="stat-label">Completed</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">~6h</span>
+                <span class="stat-label">Total Study Time</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Week Cards -->
+          <h2 id="weekly-materials">Weekly Materials</h2>
+          <p>Each card links to a full learning page. Check off weeks as you complete them — your progress is saved locally in your browser.</p>
+
+          <div class="weeks-grid" id="weeks-grid">
+
+            <!-- Week 9 -->
+            <a href="week-09.html" class="week-card" data-week="9">
+              <div class="week-number">Week 9</div>
+              <div class="week-card-body">
+                <div class="week-card-title">Discrete Series &amp; Sequences</div>
+                <div class="week-card-topics">Arithmetic progression · Geometric series · Convergence · Loop complexity</div>
+              </div>
+              <div class="week-card-meta">
+                <span class="difficulty-badge badge-beginner">Beginner</span>
+                <input type="checkbox" class="week-done-toggle" data-week="9" title="Mark Week 9 as complete" aria-label="Mark Week 9 as complete">
+              </div>
+            </a>
+
+            <!-- Week 10 -->
+            <a href="week-10.html" class="week-card" data-week="10">
+              <div class="week-number">Week 10</div>
+              <div class="week-card-body">
+                <div class="week-card-title">Homogeneous Recurrence Relations</div>
+                <div class="week-card-topics">Characteristic equation · Distinct roots · Repeated roots</div>
+              </div>
+              <div class="week-card-meta">
+                <span class="difficulty-badge badge-intermediate">Intermediate</span>
+                <input type="checkbox" class="week-done-toggle" data-week="10" title="Mark Week 10 as complete" aria-label="Mark Week 10 as complete">
+              </div>
+            </a>
+
+            <!-- Week 11 -->
+            <a href="week-11.html" class="week-card" data-week="11">
+              <div class="week-number">Week 11</div>
+              <div class="week-card-body">
+                <div class="week-card-title">Generating Functions — Foundations</div>
+                <div class="week-card-topics">Ordinary GFs · Power series · Coefficient extraction</div>
+              </div>
+              <div class="week-card-meta">
+                <span class="difficulty-badge badge-intermediate">Intermediate</span>
+                <input type="checkbox" class="week-done-toggle" data-week="11" title="Mark Week 11 as complete" aria-label="Mark Week 11 as complete">
+              </div>
+            </a>
+
+            <!-- Week 12 -->
+            <a href="week-12.html" class="week-card" data-week="12">
+              <div class="week-number">Week 12</div>
+              <div class="week-card-body">
+                <div class="week-card-title">Advanced Recurrence Relations</div>
+                <div class="week-card-topics">Non-homogeneous recurrences · Particular solutions · Divide-and-conquer</div>
+              </div>
+              <div class="week-card-meta">
+                <span class="difficulty-badge badge-hard">Hard</span>
+                <input type="checkbox" class="week-done-toggle" data-week="12" title="Mark Week 12 as complete" aria-label="Mark Week 12 as complete">
+              </div>
+            </a>
+
+            <!-- Week 13 -->
+            <a href="week-13.html" class="week-card" data-week="13">
+              <div class="week-number">Week 13</div>
+              <div class="week-card-body">
+                <div class="week-card-title">Generating Functions — Applications &amp; Project</div>
+                <div class="week-card-topics">Solving recurrences with GFs · Partition problems · Counting</div>
+              </div>
+              <div class="week-card-meta">
+                <span class="difficulty-badge badge-hard">Hard</span>
+                <input type="checkbox" class="week-done-toggle" data-week="13" title="Mark Week 13 as complete" aria-label="Mark Week 13 as complete">
+              </div>
+            </a>
+
+            <!-- Week 14 -->
+            <a href="week-14.html" class="week-card" data-week="14">
+              <div class="week-number">Week 14</div>
+              <div class="week-card-body">
+                <div class="week-card-title">Inclusion-Exclusion Principle</div>
+                <div class="week-card-topics">Venn diagrams · PIE formula · Derangements · Surjections</div>
+              </div>
+              <div class="week-card-meta">
+                <span class="difficulty-badge badge-intermediate">Intermediate</span>
+                <input type="checkbox" class="week-done-toggle" data-week="14" title="Mark Week 14 as complete" aria-label="Mark Week 14 as complete">
+              </div>
+            </a>
+
+            <!-- Week 15 -->
+            <a href="week-15.html" class="week-card" data-week="15">
+              <div class="week-number">Week 15</div>
+              <div class="week-card-body">
+                <div class="week-card-title">Relation Theory</div>
+                <div class="week-card-topics">Relations on sets · Properties · Equivalence relations · Partial orders</div>
+              </div>
+              <div class="week-card-meta">
+                <span class="difficulty-badge badge-intermediate">Intermediate</span>
+                <input type="checkbox" class="week-done-toggle" data-week="15" title="Mark Week 15 as complete" aria-label="Mark Week 15 as complete">
+              </div>
+            </a>
+
+            <!-- Week 16 -->
+            <a href="week-16.html" class="week-card" data-week="16">
+              <div class="week-number">Week 16</div>
+              <div class="week-card-body">
+                <div class="week-card-title">UAS Mastery Review</div>
+                <div class="week-card-topics">Comprehensive review · Exam strategy · Key theorems · Practice problems</div>
+              </div>
+              <div class="week-card-meta">
+                <span class="difficulty-badge badge-hard">Hard</span>
+                <input type="checkbox" class="week-done-toggle" data-week="16" title="Mark Week 16 as complete" aria-label="Mark Week 16 as complete">
+              </div>
+            </a>
+
+          </div>
+
+        </article>
+      </div>
+    </main>
+
+    <!-- RIGHT COLUMN: Sticky Table of Contents -->
+    <aside class="toc-container">
+      <h3 class="toc-title">On This Page</h3>
+      <ul class="toc-list">
+        <li class="toc-item"><a href="#discrete-mathematics-i" class="toc-link">Course Overview</a></li>
+        <li class="toc-item"><a href="#weekly-materials" class="toc-link">Weekly Materials</a></li>
+      </ul>
+    </aside>
+
+  </div>
+
+  <script>
+    /**
+     * Course index: persist week completion state with localStorage
+     * and stop card click when clicking the checkbox.
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+      const PREFIX = 'pkm-dm-week-done-';
+      const toggles = document.querySelectorAll('.week-done-toggle');
+      const completedCount = document.getElementById('completed-count');
+
+      function updateCount() {
+        let done = 0;
+        toggles.forEach(t => { if (t.checked) done++; });
+        completedCount.textContent = done;
+      }
+
+      // Restore saved states
+      toggles.forEach(toggle => {
+        const week = toggle.dataset.week;
+        const saved = localStorage.getItem(PREFIX + week) === 'true';
+        toggle.checked = saved;
+        const card = toggle.closest('.week-card');
+        if (saved && card) card.classList.add('completed');
+      });
+
+      updateCount();
+
+      // Handle toggle changes
+      toggles.forEach(toggle => {
+        toggle.addEventListener('change', (e) => {
+          e.stopPropagation();  // prevent card navigation
+          const week = toggle.dataset.week;
+          const card = toggle.closest('.week-card');
+          localStorage.setItem(PREFIX + week, toggle.checked);
+          if (card) card.classList.toggle('completed', toggle.checked);
+          updateCount();
+        });
+
+        // Prevent checkbox click from triggering anchor navigation
+        toggle.addEventListener('click', (e) => e.stopPropagation());
+      });
+    });
+  </script>
+</body>
+</html>
