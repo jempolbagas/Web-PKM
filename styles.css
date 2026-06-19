@@ -95,6 +95,7 @@ body {
 
 .sidebar-header {
   height: var(--header-height);
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -167,6 +168,7 @@ body {
 
 .main-header {
   height: var(--header-height);
+  flex-shrink: 0;
   background-color: var(--bg-page);
   border-bottom: 1px solid var(--color-border);
   display: flex;

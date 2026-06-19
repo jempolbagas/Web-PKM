@@ -4,81 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Academic Life Hub - Personal Knowledge Management</title>
-  <!-- SEO Tags -->
-  <meta name="description" content="A premium academic Personal Knowledge Management (PKM) dashboard utilizing plain HTML, CSS, and Vanilla JS.">
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="prism.css">
-  <!-- Scripts -->
-  <script src="script.js" defer></script>
-  <script src="prism.js" defer></script>
+  <!-- Load the PKM loader script -->
+  <script src="pkm-loader.js" defer></script>
 </head>
 <body>
-  <div class="app-container">
-    
-    <!-- LEFT COLUMN: Collapsible Sidebar -->
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <a href="index.html" class="sidebar-title">Academic Life Hub</a>
-      </div>
-      
-      <nav class="sidebar-nav">
-        <!-- Quick Links -->
-        <div class="nav-section">
-          <h3 class="nav-section-title">Navigation</h3>
-          <ul class="nav-list">
-            <li class="nav-item">
-              <a href="index.html" class="nav-link active">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                Dashboard
-              </a>
-            </li>
-          </ul>
-        </div>
-        
-        <!-- Courses Index -->
-        <div class="nav-section">
-          <h3 class="nav-section-title">Courses</h3>
-          <ul class="nav-list">
-            <li class="nav-item">
-              <!-- Wiki-style link trigger for Discrete Mathematics course index -->
-              <a href="discrete-math/index.html" class="nav-link" interestfor="preview-discrete-math">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
-                Discrete Mathematics
-              </a>
-            </li>
-            <li class="nav-item">
-              <!-- Wiki-style link trigger for IPv4 Computer Networks note -->
-              <a href="(CN)_7_IPv4.html" class="nav-link" interestfor="preview-computer-networks">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-                Computer Networks
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </aside>
-
-    <!-- CENTER COLUMN: Main Content Area -->
-    <main class="main-content">
-      
-      <!-- Sticky Navigation Header -->
-      <header class="main-header">
-        <div class="header-left">
-          <button id="toggle-sidebar" class="icon-btn" aria-label="Toggle Navigation Sidebar">
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-          </button>
-          <div class="breadcrumb" id="breadcrumb">
-            <span class="breadcrumb-root">Home</span>
-            <span class="breadcrumb-separator">/</span>
-            <span class="breadcrumb-current">Dashboard</span>
-          </div>
-        </div>
-      </header>
-
-      <!-- Scrollable Content Body wrapper -->
-      <div class="content-wrapper">
-        <article class="content-body">
+  <article class="content-body">
           
           <h1 id="welcome-to-your-academic-life-hub">Welcome to your Academic Life Hub</h1>
           
@@ -190,8 +120,6 @@ def get_subnet_details(ip_with_mask):
 
 get_subnet_details("192.168.1.15/24")</code></pre>
 
-        </article>
-
         <!-- Backlinks Section at bottom -->
         <section class="backlinks-section">
           <h2 class="backlinks-title" id="backlinks">
@@ -199,7 +127,7 @@ get_subnet_details("192.168.1.15/24")</code></pre>
             Linked Backlinks
           </h2>
           <div class="backlinks-grid">
-            <a href="(DM)_9_Discrete_Series.html" class="backlink-card">
+            <a href="discrete-math/week-09.html" class="backlink-card">
               <div class="backlink-title">Discrete Series & Sequences</div>
               <div class="backlink-excerpt">Lecture notes covering convergence tests, geometric progression, and arithmetic sequences. Refers to the Dashboard for study status.</div>
             </a>
@@ -209,43 +137,6 @@ get_subnet_details("192.168.1.15/24")</code></pre>
             </a>
           </div>
         </section>
-      </div>
-    </main>
-
-    <!-- RIGHT COLUMN: Sticky Table of Contents -->
-    <aside class="toc-container">
-      <h3 class="toc-title">On This Page</h3>
-      <ul class="toc-list">
-        <!-- Automatically populated by script.js -->
-        <li class="toc-item"><a href="#welcome-to-your-academic-life-hub" class="toc-link">Loading...</a></li>
-      </ul>
-    </aside>
-
-  </div>
-
-  <!-- POPULAR HOVER PREVIEW TEMPLATES (hidden popovers) -->
-  
-  <div popover="hint" id="preview-discrete-math">
-    <div class="preview-title">Discrete Mathematics I</div>
-    <div class="preview-body">
-      Covers discrete series, recurrence relations, generating functions, inclusion-exclusion, and relation theory — Weeks 9–16 of Discrete Mathematics I.
-    </div>
-    <div class="preview-footer">
-      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-      8 Weeks &bull; Beginner → Hard
-    </div>
-  </div>
-
-  <div popover="hint" id="preview-computer-networks">
-    <div class="preview-title">Computer Networks: IPv4</div>
-    <div class="preview-body">
-      Explores the Internet Protocol version 4 (IPv4) routing architecture, subnetting algorithms, headers formatting, CIDR notation, and network class assignments.
-    </div>
-    <div class="preview-footer">
-      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-      Course: Computer Networks
-    </div>
-  </div>
-
+      </article>
 </body>
 </html>
