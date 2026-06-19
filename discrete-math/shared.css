@@ -531,6 +531,9 @@
   gap: 8px;
   align-items: flex-start;
 }
+.common-mistake > div {
+  flex: 1;
+}
 
 /* ============================================================
    ACTIVE RECALL CARD
