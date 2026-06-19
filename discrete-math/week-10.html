@@ -3,82 +3,454 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Discrete Mathematics I — Homogeneous Recurrence Relations | Study Material</title>
+  <title>Week 10: Homogeneous Recurrence Relations | Discrete Mathematics I</title>
   <!-- Load the PKM loader script -->
   <script src="../pkm-loader.js" defer></script>
 </head>
 <body>
-  <!-- Declarative metadata attributes on the article element -->
   <article class="content-body" data-course="discrete-math" data-week="10">
-    
     <h1 id="topic-title">Homogeneous Recurrence Relations</h1>
-    
-    <!-- Section 1: Learning Objectives -->
-    <h2 id="learning-objectives">Learning Objectives</h2>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION 2: PREREQUISITE CHECKLIST             -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div class="prereq-section">
+      <div class="prereq-section-title">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Before You Begin — Prerequisite Checklist
+      </div>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:14px;">
+        Check each item only if you're genuinely comfortable with it. If any are unfamiliar, review them first.
+      </p>
+      <ul class="prereq-list">
+        <li class="prereq-item">
+          <input type="checkbox" class="prereq-check" id="prereq-1">
+          <label for="prereq-1" class="prereq-text">
+            <strong>Quadratic Factoring</strong> — comfortable finding roots of equations like $r^2 - 5r + 6 = 0$.
+            <span class="prereq-self-test">Self-test: Solve $r^2 - 5r + 6 = 0$. (Answer: $r_1=2, r_2=3$)</span>
+          </label>
+        </li>
+        <li class="prereq-item">
+          <input type="checkbox" class="prereq-check" id="prereq-2">
+          <label for="prereq-2" class="prereq-text">
+            <strong>Sequence Notation</strong> — understand sequence indices like $a_n, a_{n-1}, a_{n-2}$ and boundary states.
+          </label>
+        </li>
+        <li class="prereq-item">
+          <input type="checkbox" class="prereq-check" id="prereq-3">
+          <label for="prereq-3" class="prereq-text">
+            <strong>Naive Recursion</strong> — understand how a function calling itself works and why redundant computations happen.
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION 3: MOTIVATION / HOOK                  -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div class="section-heading">
+      <h2 id="why-this-matters">
+        <span class="section-number">1</span> Why Does This Matter?
+      </h2>
+    </div>
+    <p>
+      This week we transition from simple progressions (like the <a href="week-09.html" class="wiki-link" interestfor="preview-discrete-math-week-9">Discrete Series &amp; Sequences</a> we studied in Week 9) to self-referential systems: <strong>Linear Homogeneous Recurrence Relations</strong>. You will learn how to resolve recursive sequences (like Fibonacci or branching pathways) into direct closed-form formulas that require zero iteration.
+    </p>
+    <p>
+      Under the <strong>Computational Translation</strong> philosophy, we study how recursion (which is mathematically simple but computationally expensive) can be replaced by $O(1)$ constant-time algebraic functions or optimized into $O(\log n)$ matrix exponentiation.
+    </p>
+
+    <!-- Active Recall: Motivation check -->
+    <details class="recall-card">
+      <summary>
+        <span class="recall-icon">?</span>
+        <span class="recall-question">Quick check — What makes a recurrence "linear" and "homogeneous"?</span>
+      </summary>
+      <div class="recall-answer">
+        <p>A recurrence is <strong>linear</strong> if each term $a_{n-i}$ appears only to the first power (no $a_{n-1}^2$, $\sqrt{a_{n-1}}$, or terms multiplied together like $a_{n-1} a_{n-2}$).</p>
+        <p>It is <strong>homogeneous</strong> if there is no constant term or function of $n$ added (i.e., all terms are multiples of sequence members, summing to 0 if brought to one side). For example, $a_n = 5a_{n-1} - 6a_{n-2}$ is homogeneous, but $a_n = 5a_{n-1} - 6a_{n-2} + 7$ or $a_n = 5a_{n-1} - 6a_{n-2} + n^2$ is not.</p>
+      </div>
+    </details>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION 4: BIG PICTURE                        -->
+    <!-- ══════════════════════════════════════════════ -->
+    <hr class="section-divider">
+    <div class="section-heading">
+      <h2 id="learning-objectives">
+        <span class="section-number">2</span> Learning Objectives
+      </h2>
+    </div>
     <p>By the end of this lecture topic, you should be able to understand and apply the following core concepts:</p>
     <ul>
-      <li>Define the key properties of <strong>[Concept A]</strong>.</li>
-      <li>Perform calculations or solve problems involving <strong>[Formula/Algorithm B]</strong>.</li>
-      <li>Analyze the differences between <strong>[Concept A]</strong> and <strong>[Concept C]</strong>.</li>
+      <li>Identify linear homogeneous recurrence relations and write their corresponding characteristic equations.</li>
+      <li>Solve second-order linear homogeneous recurrences for both distinct and repeated root cases.</li>
+      <li>Contrast the performance and execution flow of naive recursion, memoization (Dynamic Programming), and closed-form equations.</li>
     </ul>
 
-    <!-- Section 2: Key Definitions -->
-    <h2 id="key-definitions">Key Definitions</h2>
-    <blockquote>
-      <strong>[Term A]:</strong> Provide a concise, academic definition of the first term here. Reference any important authors or system standards.
-    </blockquote>
-    <blockquote>
-      <strong>[Term B]:</strong> A second key term definition. Use internal links (e.g., <a href="../index.html" class="wiki-link" interestfor="preview-dashboard">Dashboard</a>) if referencing definitions detailed in other files.
-    </blockquote>
-
-    <!-- Section 3: Theoretical Principles -->
-    <h2 id="theoretical-principles">Theoretical Principles</h2>
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION 5: CORE CONTENT                       -->
+    <!-- ══════════════════════════════════════════════ -->
+    <hr class="section-divider">
+    <div class="section-heading">
+      <h2 id="core-concepts">
+        <span class="section-number">3</span> Core Concepts &amp; Math-to-Code Mapping
+      </h2>
+    </div>
     <p>
-      Detail the core theory here. Break it down using structured headers, lists, and formatted equations. For math or logic proofs, organize step-by-step:
+      To build computational intuition, let's examine the mathematical representations of second-order recurrences alongside their equivalent executable implementations in Python.
     </p>
-    <ol>
-      <li>State the initial assumptions or boundary conditions.</li>
-      <li>Express the relationship algebraically: <code class="language-plaintext">f(n) = a * f(n-1) + b</code>.</li>
-      <li>Solve for the characteristic equation or steady state.</li>
-    </ol>
 
-    <!-- Section 4: Practical Examples -->
-    <h2 id="practical-examples">Practical Examples</h2>
+    <table>
+      <thead>
+        <tr>
+          <th width="50%">Mathematical Theory &amp; Formulation</th>
+          <th width="50%">Python Implementation (Executable Proof)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong>Second-Order Linear Homogeneous Recurrence</strong>
+            <p>
+              $$a_n = c_1 a_{n-1} + c_2 a_{n-2}$$
+              with initial conditions $a_0 = I_0, a_1 = I_1$.
+            </p>
+            <p>
+              <strong>Characteristic Equation:</strong>
+              $$r^2 - c_1 r - c_2 = 0$$
+              which yields roots $r_1, r_2$.
+            </p>
+          </td>
+          <td>
+            <pre><code class="language-python"># Visualizing three levels of computational efficiency
+
+# 1. Naive Recursion: O(2^n) time, O(n) call stack
+def naive_recurrence(n: int) -> int:
+    if n == 0: return 1
+    if n == 1: return 8
+    return 5 * naive_recurrence(n - 1) - 6 * naive_recurrence(n - 2)
+
+# 2. Dynamic Programming (Memoized/Iterative): O(n) time, O(1) space
+def dp_recurrence(n: int) -> int:
+    if n == 0: return 1
+    if n == 1: return 8
+    prev2, prev1 = 1, 8
+    for _ in range(2, n + 1):
+        curr = 5 * prev1 - 6 * prev2
+        prev2, prev1 = prev1, curr
+    return prev1</code></pre>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Closed-Form Representation (Distinct Roots)</strong>
+            <p>
+              If roots $r_1 \neq r_2$ are distinct, the general solution is:
+              $$a_n = \alpha_1 r_1^n + \alpha_2 r_2^n$$
+              where constants $\alpha_1, \alpha_2$ are solved using $a_0$ and $a_1$.
+            </p>
+          </td>
+          <td>
+            <pre><code class="language-python"># 3. Closed-form Equation: O(1) time (assuming constant-time power)
+def closed_form_distinct(n: int) -> int:
+    # Derived from a_n = -5 * 2^n + 6 * 3^n
+    return -5 * (2**n) + 6 * (3**n)
+
+# Verification
+for i in range(15):
+    assert dp_recurrence(i) == closed_form_distinct(i)</code></pre>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Closed-Form Representation (Repeated Roots)</strong>
+            <p>
+              If roots $r_1 = r_2 = r$ are repeated, the general solution is:
+              $$a_n = (\alpha_1 + \alpha_2 n) r^n$$
+            </p>
+          </td>
+          <td>
+            <pre><code class="language-python"># Verification for: a_n = 4*a_{n-1} - 4*a_{n-2}, a_0=1, a_1=6
+# Characteristic: r^2 - 4r + 4 = (r-2)^2 = 0 -> root = 2
+# a_n = (1 + 2*n) * 2^n
+
+def closed_form_repeated(n: int) -> int:
+    return (1 + 2 * n) * (2**n)
+
+def dp_repeated(n: int) -> int:
+    if n == 0: return 1
+    if n == 1: return 6
+    p2, p1 = 1, 6
+    for _ in range(2, n + 1):
+        curr = 4 * p1 - 4 * p2
+        p2, p1 = p1, curr
+    return p1
+
+for i in range(15):
+    assert dp_repeated(i) == closed_form_repeated(i)</code></pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION 6: STEP-BY-STEP DERIVATION             -->
+    <!-- ══════════════════════════════════════════════ -->
+    <hr class="section-divider">
+    <div class="section-heading">
+      <h2 id="step-by-step-derivation">
+        <span class="section-number">4</span> Algebraic Manipulation Checkpoints
+      </h2>
+    </div>
     <p>
-      Demonstrate the theory with a concrete example. If it involves program code, scripts, or configuration commands, use a code block:
+      Let's work through the mechanical steps required to solve a recurrence relation and resolve it into a constant-time closed-form function.
     </p>
-    <pre><code class="language-python"># Example implementation of the concept
-def process_data(input_list):
-    # Apply processing algorithm
-    result = [x * 2 for x in input_list if x > 0]
-    return result
 
-print(process_data([1, -2, 3])) # Output: [2, 6]</code></pre>
-
-    <!-- Section 5: Practice Questions -->
-    <h2 id="practice-questions">Practice Questions</h2>
-    <p>
-      Test your understanding with these practice problems. Click on the headings to reveal the solutions.
-    </p>
-    
-    <details name="exercises" class="study-card">
-      <summary><strong>Question 1:</strong> [State the question or problem details here]</summary>
-      <div class="details-content">
-        <p><strong>Solution:</strong></p>
-        <p>Detail the step-by-step solution here. You can include lists or code snippets inside this block as needed.</p>
-        <pre><code class="language-plaintext">Step 1: Calculate...
-Step 2: Substitute...
-Final Answer: [Result]</code></pre>
+    <div class="worked-example">
+      <div class="worked-example-header">
+        <span class="worked-example-label">Derivation Example</span>
+        <span class="worked-example-title">Solving $a_n = 5a_{n-1} - 6a_{n-2}$ with $a_0 = 1, a_1 = 8$</span>
       </div>
-    </details>
-
-    <details name="exercises" class="study-card">
-      <summary><strong>Question 2:</strong> [State a second question or proof details here]</summary>
-      <div class="details-content">
-        <p><strong>Solution:</strong></p>
-        <p>Detail the solution here. Standard HTML markup is fully supported inside the disclosure container.</p>
+      <div class="worked-example-body">
+        <div class="example-step">
+          <div class="example-step-num">1</div>
+          <div class="example-step-content">
+            <strong>Assume a solution of the form $a_n = r^n$.</strong> Substitute $a_n = r^n$ into the recurrence relation:
+            $$r^n = 5r^{n-1} - 6r^{n-2}$$
+          </div>
+        </div>
+        <div class="example-step">
+          <div class="example-step-num">2</div>
+          <div class="example-step-content">
+            <strong>Divide by $r^{n-2}$ (assuming $r \neq 0$) to get the Characteristic Equation:</strong>
+            $$r^2 - 5r + 6 = 0$$
+          </div>
+        </div>
+        <div class="example-step">
+          <div class="example-step-num">3</div>
+          <div class="example-step-content">
+            <strong>Factor the quadratic equation to find the characteristic roots:</strong>
+            $$(r - 2)(r - 3) = 0 \implies r_1 = 2, \ r_2 = 3$$
+          </div>
+        </div>
+        <div class="example-step">
+          <div class="example-step-num">4</div>
+          <div class="example-step-content">
+            <strong>Write the general solution since the roots are distinct:</strong>
+            $$a_n = \alpha_1 2^n + \alpha_2 3^n \quad \text{--- (Equation 1)}$$
+          </div>
+        </div>
+        <div class="example-step">
+          <div class="example-step-num">5</div>
+          <div class="example-step-content">
+            <strong>Substitute initial conditions $a_0 = 1$ and $a_1 = 8$ to solve for constants $\alpha_1, \alpha_2$:</strong>
+            <ul>
+              <li>For $n=0$: $$a_0 = \alpha_1 2^0 + \alpha_2 3^0 \implies \alpha_1 + \alpha_2 = 1 \implies \alpha_2 = 1 - \alpha_1$$</li>
+              <li>For $n=1$: $$a_1 = \alpha_1 2^1 + \alpha_2 3^1 \implies 2\alpha_1 + 3\alpha_2 = 8$$</li>
+            </ul>
+          </div>
+        </div>
+        <div class="example-step">
+          <div class="example-step-num">6</div>
+          <div class="example-step-content">
+            <strong>Perform substitution to solve the system of linear equations:</strong>
+            $$2\alpha_1 + 3(1 - \alpha_1) = 8$$
+            $$2\alpha_1 + 3 - 3\alpha_1 = 8$$
+            $$-\alpha_1 + 3 = 8 \implies \alpha_1 = -5$$
+            $$\alpha_2 = 1 - (-5) = 6$$
+          </div>
+        </div>
+        <div class="example-step">
+          <div class="example-step-num">7</div>
+          <div class="example-step-content">
+            <strong>Construct the final closed-form equation:</strong>
+            $$a_n = -5 \cdot 2^n + 6 \cdot 3^n$$
+          </div>
+        </div>
+        <div class="common-mistake">
+          <span>⚠️</span>
+          <div>
+            <strong>Common mistake:</strong> Solving for constants $\alpha_1$ and $\alpha_2$ using initial conditions <em>before</em> determining whether roots are distinct or repeated. The general form equations are different, so doing this out of order leads to incorrect equations.
+          </div>
+        </div>
       </div>
-    </details>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION 7: VISUAL MAP                         -->
+    <!-- ══════════════════════════════════════════════ -->
+    <hr class="section-divider">
+    <div class="section-heading">
+      <h2 id="graphical-explanations">
+        <span class="section-number">5</span> Visual Tree Mapping &amp; Graphical Explanations
+      </h2>
+    </div>
+    <h3 id="state-transition-diagram">State Transition Diagram of DP Recurrence</h3>
+    <p>
+      Instead of expanding a tree of redundant recursive calls, the dynamic programming approach transitions through states in a linear path, updating the cache in $O(1)$ auxiliary space.
+    </p>
+
+    <!-- Custom inline responsive SVG flowchart matching academic theme colors -->
+    <div style="text-align: center; margin: 1.5rem 0;">
+      <svg viewBox="0 0 600 180" width="100%" style="max-width: 600px; display: inline-block;">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="var(--text-muted)" />
+          </marker>
+          <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#9ece6a" />
+          </marker>
+          <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#7aa2f7" />
+          </marker>
+          <marker id="arrow-pink" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#f7768e" />
+          </marker>
+        </defs>
+
+        <!-- Subgraph Container -->
+        <rect x="20" y="10" width="560" height="160" rx="8" fill="var(--bg-card)" stroke="var(--color-border)" stroke-width="1" stroke-dasharray="4 4" />
+        <text x="35" y="30" fill="var(--text-muted)" font-family="var(--font-sans)" font-size="12" font-weight="bold" letter-spacing="0.05em">ITERATIVE STATE TRANSITION (DP SPACE)</text>
+
+        <!-- Node S0 (prev2) -->
+        <rect x="50" y="65" width="110" height="46" rx="6" fill="#1a1b26" stroke="#f7768e" stroke-width="2" />
+        <text x="105" y="86" fill="#c0caf5" font-family="var(--font-mono)" font-size="13" font-weight="bold" text-anchor="middle">prev2 (a_n-2)</text>
+
+        <!-- Node S1 (prev1) -->
+        <rect x="245" y="65" width="110" height="46" rx="6" fill="#1a1b26" stroke="#7aa2f7" stroke-width="2" />
+        <text x="300" y="86" fill="#c0caf5" font-family="var(--font-mono)" font-size="13" font-weight="bold" text-anchor="middle">prev1 (a_n-1)</text>
+
+        <!-- Node S2 (curr) -->
+        <rect x="440" y="65" width="110" height="46" rx="6" fill="#24283b" stroke="#9ece6a" stroke-width="2" />
+        <text x="495" y="86" fill="#c0caf5" font-family="var(--font-mono)" font-size="13" font-weight="bold" text-anchor="middle">curr (a_n)</text>
+
+        <!-- Contribution lines (S0 -> S2, S1 -> S2) -->
+        <path d="M 160 80 Q 300 20 440 76" fill="none" stroke="#f7768e" stroke-width="2" marker-end="url(#arrow-pink)" />
+        <text x="300" y="38" fill="#f7768e" font-family="var(--font-sans)" font-size="11" font-weight="bold" text-anchor="middle">-6 * prev2</text>
+
+        <path d="M 355 88 L 430 88" fill="none" stroke="#7aa2f7" stroke-width="2" marker-end="url(#arrow-blue)" />
+        <text x="392" y="80" fill="#7aa2f7" font-family="var(--font-sans)" font-size="11" font-weight="bold" text-anchor="middle">+5 * prev1</text>
+
+        <!-- Window slide lines (S2 -> S1, S1 -> S0) -->
+        <path d="M 470 111 Q 387 148 305 111" fill="none" stroke="#9ece6a" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrow-green)" />
+        <text x="387" y="146" fill="#9ece6a" font-family="var(--font-sans)" font-size="11" font-weight="bold" text-anchor="middle">prev1 &larr; curr</text>
+
+        <path d="M 275 111 Q 192 148 110 111" fill="none" stroke="#7aa2f7" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrow-blue)" />
+        <text x="192" y="146" fill="#7aa2f7" font-family="var(--font-sans)" font-size="11" font-weight="bold" text-anchor="middle">prev2 &larr; prev1</text>
+      </svg>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION 8: PRACTICE PROBLEMS                  -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div class="practice-section">
+      <div class="practice-section-title">Exercises &amp; Self-Assessment</div>
+      <div class="practice-section-subtitle">Work through these in order. Try solving them before revealing the solution key.</div>
+
+      <!-- Problem 1 -->
+      <div class="problem-item">
+        <div class="problem-header">
+          <span class="problem-number">Problem 1 (Distinct Roots)</span>
+          <span class="difficulty-badge badge-intermediate">Level 2</span>
+        </div>
+        <p class="problem-statement">
+          Find the closed-form solution for the recurrence:
+          $$a_n = 2a_{n-1} + 3a_{n-2} \quad \text{for } n \ge 2, \text{ with } a_0 = 3, a_1 = 1$$
+        </p>
+        <details class="study-card">
+          <summary>View Solution Key</summary>
+          <div class="details-content">
+            <p><strong>Step 1:</strong> Form the characteristic equation.</p>
+            $$r^2 - 2r - 3 = 0$$
+            
+            <p><strong>Step 2:</strong> Find the roots.</p>
+            $$(r - 3)(r + 1) = 0 \implies r_1 = 3, \ r_2 = -1$$
+            
+            <p><strong>Step 3:</strong> Set up the general solution.</p>
+            $$a_n = \alpha_1 3^n + \alpha_2 (-1)^n$$
+            
+            <p><strong>Step 4:</strong> Use initial conditions to solve for $\alpha_1$ and $\alpha_2$.</p>
+            <ul>
+              <li>For $n = 0$: $$\alpha_1 + \alpha_2 = 3 \implies \alpha_2 = 3 - \alpha_1$$</li>
+              <li>For $n = 1$: $$3\alpha_1 - \alpha_2 = 1$$</li>
+            </ul>
+            
+            <p><strong>Step 5:</strong> Substitute and solve.</p>
+            $$3\alpha_1 - (3 - \alpha_1) = 1 \implies 4\alpha_1 - 3 = 1 \implies 4\alpha_1 = 4 \implies \alpha_1 = 1$$
+            $$\alpha_2 = 3 - 1 = 2$$
+            
+            <p><strong>Final Answer:</strong> The closed-form solution is <strong>$a_n = 3^n + 2(-1)^n$</strong>.</p>
+          </div>
+        </details>
+      </div>
+
+      <!-- Problem 2 -->
+      <div class="problem-item">
+        <div class="problem-header">
+          <span class="problem-number">Problem 2 (Repeated Roots)</span>
+          <span class="difficulty-badge badge-intermediate">Level 2</span>
+        </div>
+        <p class="problem-statement">
+          Find the closed-form solution for the recurrence:
+          $$a_n = 6a_{n-1} - 9a_{n-2} \quad \text{for } n \ge 2, \text{ with } a_0 = 2, a_1 = 12$$
+        </p>
+        <details class="study-card">
+          <summary>View Solution Key</summary>
+          <div class="details-content">
+            <p><strong>Step 1:</strong> Form the characteristic equation.</p>
+            $$r^2 - 6r + 9 = 0$$
+            
+            <p><strong>Step 2:</strong> Find the roots.</p>
+            $$(r - 3)^2 = 0 \implies r = 3 \quad \text{(Repeated root, multiplicity 2)}$$
+            
+            <p><strong>Step 3:</strong> Set up the general solution for repeated roots.</p>
+            $$a_n = (\alpha_1 + \alpha_2 n) 3^n$$
+            
+            <p><strong>Step 4:</strong> Use initial conditions to solve for $\alpha_1$ and $\alpha_2$.</p>
+            <ul>
+              <li>For $n = 0$: $$a_0 = (\alpha_1 + 0) 3^0 = \alpha_1 = 2$$</li>
+              <li>For $n = 1$: $$a_1 = (2 + \alpha_2) 3^1 = 12 \implies 3(2 + \alpha_2) = 12 \implies 2 + \alpha_2 = 4 \implies \alpha_2 = 2$$</li>
+            </ul>
+            
+            <p><strong>Final Answer:</strong> The closed-form solution is <strong>$a_n = (2 + 2n)3^n$</strong>.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION 9: SUMMARY / QUICK REFERENCE CARD     -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div class="week-summary">
+      <div class="week-summary-title">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 7l2 2 4-4"/></svg>
+        Week 10 — Quick Reference Card
+      </div>
+      <div class="summary-grid">
+        <div>
+          <div class="summary-col-title">Key Formulas</div>
+          <ul class="summary-term-list">
+            <li class="summary-term"><strong>Characteristic Eq:</strong> <span>$r^2 - c_1 r - c_2 = 0$</span></li>
+            <li class="summary-term"><strong>Distinct roots:</strong> <span>$a_n = \alpha_1 r_1^n + \alpha_2 r_2^n$</span></li>
+            <li class="summary-term"><strong>Repeated roots:</strong> <span>$a_n = (\alpha_1 + \alpha_2 n) r^n$</span></li>
+            <li class="summary-term"><strong>Fibonacci Equation:</strong> <span>$r^2 - r - 1 = 0$</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="summary-col-title">Key Definitions</div>
+          <ul class="summary-term-list">
+            <li class="summary-term"><strong>Linearity:</strong> <span>Terms raised to the first power; no cross-products</span></li>
+            <li class="summary-term"><strong>Homogeneity:</strong> <span>No independent constants or non-homo terms ($f(n)$)</span></li>
+            <li class="summary-term"><strong>Characteristic Root:</strong> <span>Roots to the characteristic polynomial equation</span></li>
+            <li class="summary-term"><strong>Closed-Form Solution:</strong> <span>An algebraic formula computed in $O(1)$ constant time</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="summary-caution">
+        ⚠️ <strong>Important Order of Operations:</strong> Constrain constants $\alpha_1$ and $\alpha_2$ with initial values $a_0, a_1$ <em>only after</em> setting up the correct general form equation (distinct vs. repeated roots).
+      </div>
+    </div>
 
   </article>
 </body>
