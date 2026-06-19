@@ -1,5 +1,4 @@
 /**
-/**
  * Academic PKM Configuration Database
  * Central repository for all courses, weeks, and note pages.
  * Used by pkm-loader.js to build sidebars, headers, indexes, and navigation dynamically.
@@ -29,12 +28,23 @@ const PKM_CONFIG = {
     {
       id: "computer-networks",
       title: "Computer Networks",
-      folder: "", // root directory
+      folder: "",
       indexFile: "(CN)_7_IPv4.html",
       description: "A deep dive into IPv4 header formats, subnet masking, routing tables, and classful networks.",
       studyTime: "50m",
       weeks: [
         { num: 7, title: "IPv4 Addressing & Networking", file: "(CN)_7_IPv4.html", difficulty: "Medium", readingTime: "50 minutes", topics: "Headers formatting · Subnetting · CIDR · Classful networks" }
+      ]
+    },
+    {
+      id: "linear-algebra",
+      title: "Linear Algebra",
+      folder: "linear-algebra",
+      indexFile: "index.html",
+      description: "Introduction to matrices, vector spaces, and linear transformations.",
+      studyTime: "~4h",
+      weeks: [
+        { num: 1, title: "Systems of Linear Equations", file: "week-01.html", difficulty: "Beginner", readingTime: "35–45 minutes", topics: "Linear equations · Matrix representation · Gaussian elimination" }
       ]
     }
   ]
